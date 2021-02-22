@@ -1,4 +1,4 @@
-const {DataTypes} = require('sequelize');
+const {Sequelize} = require('sequelize');
 const Coursecontent=require('./coursecontent.js');
 const Course=require('./course.js');
 const Courseprogress=require('./courseprogress.js');
@@ -12,7 +12,7 @@ Course.hasMany(Coursecontent,{
     onUpdate : "RESTRICT",
     foreignKey:{
         name:"course_id",
-        type:DataTypes.BIGINT,
+        type:Sequelize.BIGINT,
         allowNull:false,
     },
 });
@@ -30,7 +30,7 @@ Course.hasMany(Discovery,{
     onUpdate : "RESTRICT",
     foreignKey:{
         name:"course_id",
-        type:DataTypes.BIGINT,
+        type:Sequelize.BIGINT,
         allowNull:false,
     },
 });
@@ -48,7 +48,7 @@ Coursecontent.hasMany(Courseprogress,{
     onUpdate : "RESTRICT",
     foreignKey:{
         name:"course_content_id",
-        type:DataTypes.BIGINT,
+        type:Sequelize.BIGINT,
         allowNull:false,
     },
 });
@@ -67,7 +67,7 @@ Discovery.hasMany(Discoveryanswer,{
     onUpdate : "RESTRICT",
     foreignKey:{
         name:"discovery_id",
-        type:DataTypes.BIGINT,
+        type:Sequelize.BIGINT,
         allowNull:false,
     },
 });
