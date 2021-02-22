@@ -6,9 +6,12 @@ const Discovery = require("./discovery.js");
 const Discoveryanswer = require("./discoveryanswer.js");
 const Question = require("./question.js");
 const Option = require("./option.js");
-const Order = require("./order.js");
+const Order = require("./order.js"); 
 const Order_detail = require("./orderdetail.js");
 const Payment = require("./payment.js");
+const Event = require("./event.js");
+const User = require("./User.js");
+
 
 // One to Many relationship between Course and Coursecontent
 Course.hasMany(Coursecontent, {
@@ -158,5 +161,137 @@ Order.hasOne(Payment, {
 Payment.belongsTo(Order, {
   foreignKey: {
     name: "order_id",
+  },
+});
+
+
+
+
+
+
+
+
+
+// Association Between EVENT Table and USER Table 
+User.hasMany(Event, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "coach_user_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+
+Event.belongsTo(User, {
+  foreignKey: {
+    name: "coach_user_id",
+  },
+});
+
+// Association Between EVENT Table and COURSE Table 
+Course.hasMany(Event, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "course_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+
+Event.belongsTo(User, {
+  foreignKey: {
+    name: "course_id",
+  },
+});
+
+
+
+// Association Between CART Table and USER Table  
+User.hasMany(Cart, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "user_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+
+Cart.belongsTo(User, {
+  foreignKey: {
+    name: "user_id",
+  },
+});
+
+// Association Between CART Table and COURSE Table 
+Course.hasMany(Cart, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "course_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+
+Cart.belongsTo(Course, {
+  foreignKey: {
+    name: "course_id",
+  },
+});
+
+
+// Association Between INVITATION Table and USER Table
+User.hasMany(Invitation, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "coach_user_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+
+Invitation.belongsTo(User, {
+  foreignKey: {
+    name: "coach_user_id",
+  },
+});
+
+// Association Between INVITATION Table and USER Table
+User.hasMany(Invitation, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "student_user_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+
+Invitation.belongsTo(User, {
+  foreignKey: {
+    name: "student_user_id",
+  },
+});
+
+
+
+// Association Between INVITATION Table and ORDER_DETAIL Table
+Order_Detail.hasMany(Invitation, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "order_detail_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+
+Invitation.belongsTo(Order_Detail, {
+  foreignKey: {
+    name: "order_detail_id",
   },
 });
