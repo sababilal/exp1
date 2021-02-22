@@ -8,6 +8,8 @@ const Question = require("./question.js");
 const Option = require("./option.js");
 const Order = require("./order.js");
 const Order_detail = require("./orderdetail.js");
+const Payment = require("./payment.js");
+
 // One to Many relationship between Course and Coursecontent
 Course.hasMany(Coursecontent, {
   onDelete: "RESTRICT",
@@ -140,5 +142,21 @@ Course.hasMany(Order_detail, {
 Order_detail.belongsTo(Course, {
   foreignKey: {
     name: "course_id",
+  },
+});
+
+//Association between table Order and table Payment
+Order.hasOne(Payment, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "order_id",
+    type: DataTypes.BIGINT(20),
+    allowNull: false,
+  },
+});
+Payment.belongsTo(Order, {
+  foreignKey: {
+    name: "order_id",
   },
 });
