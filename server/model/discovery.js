@@ -1,36 +1,23 @@
-const {Sequelize,DataTypes} = require('sequelize');
+const {Sequelize} = require('sequelize');
  require('../../dbconfig/dbconnect.js');
 
-const discoveryModel=()=>{
 
-        const Course= sequelize.define('Course',{
+        const Discovery= sequelize.define('Discovery',{
         id:{
-            type:DataTypes.BIGINT,
+            type:Sequelize.BIGINT,
             autoIncrement:true,
             allowNull:false,
             primaryKey:true
         },
-        user_id :{
-        type: DataTypes.STRING,
-        allowNull:false
-        },
-        course_id:{
-            type: DataTypes.STRING,
-            allowNull:true
-        },
         discovery_date:{
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull:false    
-        },
-        why_id :{
-            type:DataTypes.STRING,
-            allowNull:true
-        },{
-        tableName:'course'
-         }, {
+        }},
+         {
+        tableName:'discovery',
         timestamps: false
         });
-          return Course;
-}
+          
 
-exports.courseModel=courseModel;
+
+module.exports=Discovery;

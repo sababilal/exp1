@@ -1,36 +1,26 @@
-const {Sequelize,DataTypes} = require('sequelize');
- require('../../dbconfig/dbconnect.js');
+const {Sequelize} = require('sequelize');
+ require('../database/dbconfig.js');
 
-const discoveryModel=()=>{
-
-        const Course= sequelize.define('Course',{
+        const Courseprogress= sequelize.define('Courseprogress',{
         id:{
-            type:DataTypes.BIGINT,
+            type:Sequelize.BIGINT,
             autoIncrement:true,
             allowNull:false,
             primaryKey:true
         },
-        user_id :{
-        type: DataTypes.STRING,
-        allowNull:false
-        },
-        course_id:{
-            type: DataTypes.STRING,
-            allowNull:true
-        },
-        discovery_date:{
-            type: DataTypes.DATE,
-            allowNull:false    
-        },
-        why_id :{
-            type:DataTypes.STRING,
-            allowNull:true
+       completed_date:{
+           type:Sequelize.DATE,
+           allowNull:false
+       }
         },{
-        tableName:'course'
-         }, {
+        tableName:'course_content',
         timestamps: false
         });
-          return Course;
-}
+  
+       
+  
+  
+  
+              
 
-exports.courseModel=courseModel;
+module.exports=Courseprogress;

@@ -1,49 +1,50 @@
-const {Sequelize,DataTypes} = require('sequelize');
+const {Sequelize} = require('sequelize');
 require('../database/dbconfig.js');
-const Coursecontent=require('./coursecontent.js');
 
         const Course= sequelize.define('Course',{
         id:{
-            type:DataTypes.BIGINT,
+            type:Sequelize.BIGINT,
             autoIncrement:true,
             allowNull:false,
             primaryKey:true
         },
         name :{
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull:false
         },
         description:{
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull:true
         },
         price :{
-            type: DataTypes.BIGINT,
+            type: Sequelize.BIGINT,
             allowNull:false    
         },
         currency :{
-            type:DataTypes.STRING,
+            type:Sequelize.STRING,
             allowNull:true
         }},{
-        tableName:'course'
-         }, {
+        tableName:'course',
         timestamps: false
-        });
-
-         Course.hasMany(Coursecontent,{
-             onDelete : "RESTRICT",
-             onUpdate : "RESTRICT",
-             foreignKey:{
-                 name:"course_id",
-                 type:DataTypes.BIGINT,
-                 allowNull:false,
-             },
          });
-      
-         Coursecontent.belongsTo(Course,{
-            foreignKey:{
-                name : "course_id",
-            },
-        });
 
-exports.Course=Course;
+   
+        //  const register =async ()=>{
+                   
+        //     const course= await Coursecontent.create({
+        //         name:"course2",
+        //         price:20
+        //     });
+        //     return course;
+        //       }
+        
+
+        //       register().then((response)=>{
+        //         console.log(response);
+        //                 }).catch((error)=>{
+        //                     console.log(error);
+        //                         });
+
+
+
+module.exports=Course;

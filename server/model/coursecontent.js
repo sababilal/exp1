@@ -1,38 +1,37 @@
-const {Sequelize,DataTypes} = require('sequelize');
+const {Sequelize} = require('sequelize');
  require('../database/dbconfig.js');
- const Course=require('./course.js');
 
-        const Coursecontent= sequelize.define('Course',{
+        const Coursecontent= sequelize.define('Coursecontent',{
         id:{
-            type:DataTypes.BIGINT,
+            type:Sequelize.BIGINT,
             autoIncrement:true,
             allowNull:false,
             primaryKey:true
         },
         content:{
-            type: DataTypes.TEXT,
-            allowNull:true
-        }},{
-        tableName:'course_content'
-         }, {
+            type: Sequelize.TEXT,
+            allowNull:false
+        }
+        },{
+        tableName:'course_content',
         timestamps: false
         });
-        Course.hasMany(Coursecontent,{
-            onDelete : "RESTRICT",
-            onUpdate : "RESTRICT",
-            foreignKey:{
-                name:"course_id",
-                type:DataTypes.BIGINT,
-                allowNull:false,
-            },
-        });
-     
-        
-        Coursecontent.belongsTo(Course,{
-            foreignKey:{
-                name : "course_id",
-            },
-        });
-      
+  
+       
+  
+  
+  
+//         const check=async()=>{
+//             const coursecontent = await Coursecontent.findAll({
+//                 attributes: { exclude: ['createdAt','updatedAt'] }});
+//             return coursecontent;
+//         }
+//         check().then((response)=>{
+// console.log(response);
+//         }).catch((error)=>{
+//             console.log(error);
+//                 })
 
-exports.Coursecontent=Coursecontent;
+              
+
+module.exports=Coursecontent;
