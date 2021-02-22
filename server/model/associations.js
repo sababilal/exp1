@@ -10,7 +10,10 @@ const Order = require("./order.js");
 const Order_detail = require("./orderdetail.js");
 const Payment = require("./payment.js");
 const Event = require("./event.js");
-const User = require("./User.js");
+const User = require("./user.js");
+const Cart = require("./cart.js");
+const Invitation = require("./invitation.js");
+const Why = require("./why.js");
 
 
 // One to Many relationship between Course and Coursecontent
