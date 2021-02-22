@@ -6,6 +6,8 @@ const Discovery = require("./discovery.js");
 const Discoveryanswer = require("./discoveryanswer.js");
 const Question = require("./question.js");
 const Option = require("./option.js");
+const Order = require("./order.js");
+const Order_detail = require("./orderdetail.js");
 // One to Many relationship between Course and Coursecontent
 Course.hasMany(Coursecontent, {
   onDelete: "RESTRICT",
@@ -104,6 +106,38 @@ Course.hasMany(Question, {
   },
 });
 Question.belongsTo(Course, {
+  foreignKey: {
+    name: "course_id",
+  },
+});
+
+//Association between table Order and table Order_detail
+Order.hasMany(Order_detail, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "order_id",
+    type: DataTypes.BIGINT(20),
+    allowNull: false,
+  },
+});
+Order_detail.belongsTo(Order, {
+  foreignKey: {
+    name: "order_id",
+  },
+});
+
+//Association between table Course and table Order_detail
+Course.hasMany(Order_detail, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "course_id",
+    type: DataTypes.BIGINT(20),
+    allowNull: false,
+  },
+});
+Order_detail.belongsTo(Course, {
   foreignKey: {
     name: "course_id",
   },
