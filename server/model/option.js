@@ -1,6 +1,6 @@
 const sequelize = require("./../database/connection");
 const Sequelize = require("sequelize");
-module.exports = sequelize.define(
+const Option = sequelize.define(
   "option",
   {
     id: {
@@ -26,3 +26,4 @@ module.exports = sequelize.define(
     tableName: "option",
   }
 );
+module.exports = Option;

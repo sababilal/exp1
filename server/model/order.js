@@ -1,6 +1,6 @@
 const sequelize = require("./../database/connection");
 const Sequelize = require("sequelize");
-module.exports = sequelize.define(
+const Order = sequelize.define(
   "order",
   {
     id: {
@@ -27,3 +27,4 @@ module.exports = sequelize.define(
     tableName: "order",
   }
 );
+module.exports = Order;
