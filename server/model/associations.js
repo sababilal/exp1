@@ -78,4 +78,18 @@ Discoveryanswer.belongsTo(Discovery,{
     },
 });
 
-  
+//Association between table Question and table Option
+Question.hasMany(Option, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "question_id",
+    type: DataTypes.BIGINT(20),
+    allowNull: false,
+  },
+});
+Option.belongsTo(Question, {
+  foreignKey: {
+    name: "question_id",
+  },
+});
