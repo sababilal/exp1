@@ -1,4 +1,4 @@
-const sequelize = require("./../database/connection");
+const sequelize = require("../database/dbconfig");
 const Sequelize = require("sequelize");
 const Order = sequelize.define(
   "order",
@@ -8,14 +8,6 @@ const Order = sequelize.define(
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-    },
-    user_id: {
-      type: Sequelize.BIGINT(20),
-      allowNull: false,
-    },
-    event_id: {
-      type: Sequelize.BIGINT(20),
-      allowNull: false,
     },
     order_date: {
       type: Sequelize.DATE,

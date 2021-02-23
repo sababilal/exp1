@@ -6,7 +6,7 @@ const Discovery = require("./discovery.js");
 const Discoveryanswer = require("./discoveryanswer.js");
 const Question = require("./question.js");
 const Option = require("./option.js");
-const Order = require("./order.js"); 
+const Order = require("./order.js");
 const Order_detail = require("./orderdetail.js");
 const Payment = require("./payment.js");
 const Event = require("./event.js");
@@ -15,21 +15,20 @@ const Cart = require("./cart.js");
 const Invitation = require("./invitation.js");
 const Why = require("./why.js");
 
-
-// One to Many relationship between Course and Coursecontent
-Course.hasMany(Coursecontent, {
+// One to Many relationship between  Courseprogress and User
+User.hasMany(Courseprogress, {
   onDelete: "RESTRICT",
   onUpdate: "RESTRICT",
   foreignKey: {
-    name: "course_id",
+    name: "user_id",
     type: Sequelize.BIGINT,
     allowNull: false,
   },
 });
 
-Coursecontent.belongsTo(Course, {
+Courseprogress.belongsTo(User, {
   foreignKey: {
-    name: "course_id",
+    name: "user_id",
   },
 });
 
@@ -119,6 +118,38 @@ Question.belongsTo(Course, {
   },
 });
 
+//Association between table User and table Order
+User.hasMany(Order, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "user_id",
+    type: DataTypes.BIGINT(20),
+    allowNull: false,
+  },
+});
+Order.belongsTo(User, {
+  foreignKey: {
+    name: "user_id",
+  },
+});
+
+//Association between table Event and table Order
+Event.hasMany(Order, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "event_id",
+    type: DataTypes.BIGINT(20),
+    allowNull: false,
+  },
+});
+Order.belongsTo(Event, {
+  foreignKey: {
+    name: "event_id",
+  },
+});
+
 //Association between table Order and table Order_detail
 Order.hasMany(Order_detail, {
   onDelete: "RESTRICT",
@@ -167,15 +198,23 @@ Payment.belongsTo(Order, {
   },
 });
 
+//Association between table User and table Payment
+User.hasMany(Payment, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "user_id",
+    type: DataTypes.BIGINT(20),
+    allowNull: false,
+  },
+});
+Payment.belongsTo(User, {
+  foreignKey: {
+    name: "user_id",
+  },
+});
 
-
-
-
-
-
-
-
-// Association Between EVENT Table and USER Table 
+// Association Between EVENT Table and USER Table
 User.hasMany(Event, {
   onDelete: "RESTRICT",
   onUpdate: "RESTRICT",
@@ -192,7 +231,7 @@ Event.belongsTo(User, {
   },
 });
 
-// Association Between EVENT Table and COURSE Table 
+// Association Between EVENT Table and COURSE Table
 Course.hasMany(Event, {
   onDelete: "RESTRICT",
   onUpdate: "RESTRICT",
@@ -203,15 +242,13 @@ Course.hasMany(Event, {
   },
 });
 
-Event.belongsTo(User, {
+Event.belongsTo(Course, {
   foreignKey: {
     name: "course_id",
   },
 });
 
-
-
-// Association Between CART Table and USER Table  
+// Association Between CART Table and USER Table
 User.hasMany(Cart, {
   onDelete: "RESTRICT",
   onUpdate: "RESTRICT",
@@ -228,7 +265,7 @@ Cart.belongsTo(User, {
   },
 });
 
-// Association Between CART Table and COURSE Table 
+// Association Between CART Table and COURSE Table
 Course.hasMany(Cart, {
   onDelete: "RESTRICT",
   onUpdate: "RESTRICT",
@@ -245,7 +282,6 @@ Cart.belongsTo(Course, {
   },
 });
 
-
 // Association Between INVITATION Table and USER Table
 User.hasMany(Invitation, {
   onDelete: "RESTRICT",
@@ -279,8 +315,6 @@ Invitation.belongsTo(User, {
     name: "student_user_id",
   },
 });
-
-
 
 // Association Between INVITATION Table and ORDER_DETAIL Table
 Order_Detail.hasMany(Invitation, {

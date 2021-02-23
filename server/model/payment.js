@@ -1,4 +1,4 @@
-const sequelize = require("./../database/connection");
+const sequelize = require("../database/dbconfig");
 const Sequelize = require("sequelize");
 const Payment = sequelize.define(
   "payment",
@@ -8,14 +8,6 @@ const Payment = sequelize.define(
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-    },
-    user_id: {
-      type: Sequelize.BIGINT(20),
-      allowNull: false,
-    },
-    order_id: {
-      type: Sequelize.BIGINT(20),
-      allowNull: false,
     },
     date: {
       type: Sequelize.DATE,
