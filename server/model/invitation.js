@@ -11,16 +11,13 @@ const Invitation = sequelize.define(
             autoIncrement: true,
             primaryKey: true,
         },
-        coach_user_id: {
-            type: Sequelize.BIGINT(20),
-            allowNull: false,
-        },
         first_name: {
             type: Sequelize.STRING,
             allowNull: false,
         },
         last_name: {
             type: Sequelize.STRING,
+            allowNull: true,
         },
         email: {
             type: Sequelize.STRING,
@@ -28,20 +25,15 @@ const Invitation = sequelize.define(
         },
         coupon_code: {
             type: Sequelize.STRING,
+            allowNull: true,
         },
         invitation_date: {
             type: Sequelize.DATE,
+            allowNull: true,
         },
         expiration_date: {
             type: Sequelize.DATE,
-        },
-        order_detail_id: {
-            type: Sequelize.BIGINT(20),
-            allowNull: false,
-        },
-        student_user_id: {
-            type: Sequelize.BIGINT(20),
-            allowNull: false,
+            allowNull: true,
         },
     },
 

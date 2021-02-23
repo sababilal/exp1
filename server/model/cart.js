@@ -12,14 +12,7 @@ const Cart= sequelize.define(
         },
         date_added: {
             type: Sequelize.DATE,
-        },
-        user_id: {
-            type: Sequelize.BIGINT(20),    
-            allowNull: false,    
-        },
-        course_id: {
-            type: Sequelize.BIGINT(20),
-            allowNull: false,
+            allowNull: true,
         },
         quantity: {
             type: Sequelize.BIGINT(20),

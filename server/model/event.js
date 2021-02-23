@@ -10,15 +10,13 @@ const Event = sequelize.define(
             autoIncrement: true,
             primaryKey: true,
         },
-        coach_user_id: {
-            type: Sequelize.BIGINT(20),
-            allowNull: false,
-        },
         code: {
             type: Sequelize.STRING,
+            allowNull: true,
         },
         name: {
             type: Sequelize.STRING,
+            allowNull: true,
         },
         venue: {
             type: Sequelize.TEXT,
@@ -34,10 +32,6 @@ const Event = sequelize.define(
         },
         duration: {
             type: Sequelize.STRING,
-            allowNull: false,
-        },
-        course_id: {
-            type: Sequelize.BIGINT(20),
             allowNull: false,
         },
     },

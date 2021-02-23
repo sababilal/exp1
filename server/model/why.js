@@ -20,9 +20,11 @@ const Why=sequelize.define(
         },
         description: {
             type: Sequelize.TEXT,
+            allowNull: true,
         },
         resource_link: {
             type: Sequelize.TEXT,
+            allowNull: true,
         },
     },
     

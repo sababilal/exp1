@@ -31,9 +31,11 @@ const User = sequelize.define(
         },
         is_student: {
             type: Sequelize.STRING,
+            allowNull: true,
         },
         is_coach: {
             type: Sequelize.STRING,
+            allowNull: true,
         },
         is_admin: {
             type: Sequelize.STRING,
