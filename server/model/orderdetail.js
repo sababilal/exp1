@@ -1,7 +1,8 @@
-const sequelize = require("../database/dbconfig");
+require("../database/dbconfig");
 const Sequelize = require("sequelize");
-const Orderdetail = sequelize.define(
-  "order_detail",
+const Invitation= require("./invitation");
+
+const Orderdetail = sequelize.define(  "Orderdetail",
   {
     id: {
       type: Sequelize.BIGINT(20),
@@ -27,4 +28,22 @@ const Orderdetail = sequelize.define(
     tableName: "order_detail",
   }
 );
+
+// Association Between INVITATION Table and ORDER_DETAIL Table
+Orderdetail.hasMany(Invitation, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "order_detail_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+
+Invitation.belongsTo(Orderdetail, {
+  foreignKey: {
+    name: "order_detail_id",
+  },
+});
+
 module.exports = Orderdetail;

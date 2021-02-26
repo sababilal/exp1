@@ -1,5 +1,7 @@
 const {Sequelize} = require('sequelize');
- require('../database/dbconfig.js');
+require('../database/dbconfig.js');
+const Courseprogress=require('./courseprogress.js');
+
 
         const Coursecontent= sequelize.define('Coursecontent',{
         id:{
@@ -13,25 +15,26 @@ const {Sequelize} = require('sequelize');
             allowNull:false
         }
         },{
-        tableName:'course_content',
-        timestamps: false
+            tableName:'course_content',
+            timestamps: false
         });
   
-       
-  
-  
-  
-//         const check=async()=>{
-//             const coursecontent = await Coursecontent.findAll({
-//                 attributes: { exclude: ['createdAt','updatedAt'] }});
-//             return coursecontent;
-//         }
-//         check().then((response)=>{
-// console.log(response);
-//         }).catch((error)=>{
-//             console.log(error);
-//                 })
+  // One to Many relationship between Coursecontent and Courseprogress
 
-              
+  Coursecontent.hasMany(Courseprogress,{
+    onDelete : "RESTRICT",
+    onUpdate : "RESTRICT",
+    foreignKey:{
+        name:"course_content_id",
+        type:Sequelize.BIGINT,
+        allowNull:false,
+    },
+});
+
+Courseprogress.belongsTo(Coursecontent,{
+    foreignKey:{
+        name : "course_content_id",
+    },
+});      
 
 module.exports=Coursecontent;

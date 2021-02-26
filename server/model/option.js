@@ -1,7 +1,7 @@
 const sequelize = require("../database/dbconfig");
 const Sequelize = require("sequelize");
-const Option = sequelize.define(
-  "option",
+const Discoveryanswer = require("./discoveryanswer");
+const Option = sequelize.define( "option",
   {
     id: {
       type: Sequelize.BIGINT(20),
@@ -26,4 +26,21 @@ const Option = sequelize.define(
     tableName: "option",
   }
 );
+
+//Association between table Option and table Discoveryanswer
+Option.hasMany(Discoveryanswer, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "option_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+Discoveryanswer.belongsTo(Option, {
+  foreignKey: {
+    name: "option_id",
+  },
+});
+
 module.exports = Option;

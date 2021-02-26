@@ -1,8 +1,7 @@
 const Sequelize = require("sequelize");
 require("../database/dbconfig");
-
-const Event = sequelize.define(
-    "event",
+const Order= require("./order.js");
+const Event = sequelize.define(  "event",
     {
         id: {
             type: Sequelize.BIGINT(20),
@@ -41,4 +40,21 @@ const Event = sequelize.define(
         tableName: "event",
     }
 );
+
+//Association between table Event and table Order
+Event.hasMany(Order, {
+    onDelete: "RESTRICT",
+    onUpdate: "RESTRICT",
+    foreignKey: {
+      name: "event_id",
+      type: Sequelize.BIGINT(20),
+      allowNull: false,
+    },
+  });
+  Order.belongsTo(Event, {
+    foreignKey: {
+      name: "event_id",
+    },
+  });
+  
 module.exports=Event;

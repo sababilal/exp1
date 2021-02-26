@@ -1,6 +1,5 @@
 const {Sequelize} = require('sequelize');
- require('../../dbconfig/dbconnect.js');
-
+require('../database/dbconfig.js');
 
         const Discoveryanswer= sequelize.define('Discoveryanswer',{
         id:{
@@ -9,8 +8,8 @@ const {Sequelize} = require('sequelize');
             allowNull:false,
             primaryKey:true
         }},{
-        tableName:'discovery_answer',
-        timestamps: false
+            tableName:'discovery_answer',
+            timestamps: false
         });
          
 module.exports=Discoveryanswer;

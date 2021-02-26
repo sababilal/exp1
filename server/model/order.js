@@ -1,7 +1,8 @@
-const sequelize = require("../database/dbconfig");
+require("../database/dbconfig");
 const Sequelize = require("sequelize");
-const Order = sequelize.define(
-  "order",
+const Orderdetail= require("./orderdetail");
+const Payment= require("./payment");
+const Order = sequelize.define("order",
   {
     id: {
       type: Sequelize.BIGINT(20),
@@ -19,4 +20,38 @@ const Order = sequelize.define(
     tableName: "order",
   }
 );
+
+//Association between table Order and table Order_detail
+Order.hasMany(Orderdetail, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "order_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+Orderdetail.belongsTo(Order, {
+  foreignKey: {
+    name: "order_id",
+  },
+});
+
+
+//Association between table Order and table Payment
+Order.hasMany(Payment, {
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+  foreignKey: {
+    name: "order_id",
+    type: Sequelize.BIGINT(20),
+    allowNull: false,
+  },
+});
+Payment.belongsTo(Order, {
+  foreignKey: {
+    name: "order_id",
+  },
+});
+
 module.exports = Order;

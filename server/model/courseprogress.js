@@ -9,18 +9,14 @@ const {Sequelize} = require('sequelize');
             primaryKey:true
         },
        completed_date:{
-           type:Sequelize.DATE,
-           allowNull:false
+            type:Sequelize.DATE,
+            allowNull:false
        }
         },{
-        tableName:'course_content',
-        timestamps: false
+            tableName:'course_progress',
+            timestamps: false
         });
-  
-       
-  
-  
-  
-              
+   
+
 
 module.exports=Courseprogress;
